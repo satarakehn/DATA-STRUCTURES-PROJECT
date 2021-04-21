@@ -5,6 +5,7 @@
 #include <string> 
 #include <fstream>
 #include <sstream>
+#include <filesystem> 
 
 using namespace std; 
 
@@ -17,8 +18,8 @@ struct doublyNode{
 };
 
 struct singlyNode{
-    string fileName; 
-    string fileVersion; 
+    string fileName; //name of local file
+    string fileVersion; //name of file in .minigit folder 
     singlyNode *next;
 };
 
@@ -27,6 +28,10 @@ class miniGit{
     public:
     miniGit(); //constructor
     ~miniGit();//destructor
+    void adddFile(); //add file to repo
+    void removeFile(); //remove file from repo 
+    void commitChanges(); 
+    void checkout(); //checkout any of the previous versions of the repo 
 
 }; 
 
