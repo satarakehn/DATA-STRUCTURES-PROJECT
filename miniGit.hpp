@@ -20,8 +20,6 @@ struct singlyNode{
     string fileName; 
     string fileVersion; 
     singlyNode *next;
-
-
 };
 
 class miniGit{
