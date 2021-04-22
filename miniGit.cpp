@@ -5,13 +5,13 @@ using namespace std;
 
 miniGit::miniGit(){ //constructor 
 
-}
+};
 
 miniGit::~miniGit(){ //destructor
 
 }
 
-void miniGit::adddFile(){
+void miniGit::adddFile(string fileName){
     //prompt user to enter a file name 
     //check if file name exists if not keep prompting user to enter valid file name 
     //the SLL is checked to see whether file has already been added.
@@ -20,7 +20,7 @@ void miniGit::adddFile(){
     //new repo file should ombine original file name and version number 
 
 }
-void miniGit::removeFile(){
+void miniGit::removeFile(string fileName){
     //prompt user ot enter a file name 
     //check the SLL for whether the file exists in the current version of the repo
     //if found delete the SLL node 
@@ -42,7 +42,7 @@ void miniGit::commitChanges(){
 } 
 
 
-void miniGit::checkout(){
+void miniGit::checkout(int commitNumber){
     // -> this is referencing continuing sentence on next line 
     //if user chooses to checout a version, the should be prompted to enter a commit number 
     //if commit number is valid, the files in current directory should be overwritten by the ->
