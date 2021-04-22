@@ -21,27 +21,51 @@ int main(int argc, char const *argv[]){
     while(true){
         displayMenu();
         getline(cin,userinput);
-        if(userinput == "1"){
-            break; 
+        if(userinput == "1")
+        {
+            string filename;
+            cout << "Enter a filename to be added." << endl;
+            getline(cin, filename);
+            if (!fs::exists(filename))//check if the file exists
+            {
+                adddFile(filename);
+            }
+            else
+            {
+                cout << "File already exists." << endl;
+            }
+            
         }
         else if(userinput == "2")
         {
-            break;
+            string filename;
+            cout << "Enter a filename to be deleted." << endl;
+            getline(cin, filename);
+            if (!fs::exists(filename))
+            {
+                removeFile(filename);
+            }
+            else
+            {
+                cout << "File already exists." << endl;
+            }
+            
         }
         else if(userinput == "3")
         {
-            break; 
+           
         }
         else if(userinput == "4")
         {
-            break; 
+            
         }
         else if(userinput == "5")
         {
             cout << "Goodbye!" << endl; 
+            
         }
         else{
-            //cout << "Command not found"<< endl;  
+            cout << "Command not found"<< endl;  
             //or break; 
         }
     }
