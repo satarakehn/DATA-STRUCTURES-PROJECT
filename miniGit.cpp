@@ -11,13 +11,64 @@ miniGit::~miniGit(){ //destructor
 
 }
 
-void miniGit::adddFile(string fileName){
+void miniGit::addFile(string filename){
     //prompt user to enter a file name 
     //check if file name exists if not keep prompting user to enter valid file name 
     //the SLL is checked to see whether file has already been added.
     //file by same name cannot be added twice 
     //a new SLL node gets added containting the name of the input file, repo file, & pointer to next node
     //new repo file should ombine original file name and version number 
+    /*
+ A new SLL node gets added containing the name of the input file, name of the repos-itory file, as well as a pointer to the next node. 
+ The repository file name should bethe combination of the original file name and the version number.  
+ For example, if userfilehelp.txt is added, the new file to be saved in the .minigit repository should be named help00.txt, 
+ where 00 is the version number.  (The initial file version should be 00.) 
+
+    //Ask about fileversion name and how to change it each time
+    //ask about how to add files to the minigit system
+ 
+    */
+    singlyNode* curr = head;
+    while (curr != 0)
+    {
+        if (curr->fileName == filename) //search through the linked list.
+        {
+            cout << "file already exists." << endl;
+        }
+    }
+    if (fs::exists(".minigit/filename")); // to check if the filename exists inside the .minigit directory *ask about this
+    {
+        cout << "File exists in .minigit repository";
+    }
+    else
+    {
+            singlyNode * newfile = new singlyNode; //create a new single node
+            newfile->fileName = filename;
+            newfile->next = 0; //add a new file
+
+        if (curr == 0) //if there haven't been any files yet
+        {
+
+            newfile->next = head; 
+            head = newfile;
+            newfile->fileVersion = fileName; //ask about this
+
+        }
+        else
+        {
+          
+            while(curr->next != NULL) //add the file node at the end of the linked list
+            {
+                curr = curr->next;
+                curr->next = newfile; //insert at the end of the file
+                newfile->next = NULL;
+            }
+           newfile->fileVersion = fileName; //this should be the name of the file in the .minigit version
+        }
+        
+    }
+    
+
 
 }
 void miniGit::removeFile(string fileName){
