@@ -24,34 +24,35 @@ void miniGit::addFile(string filename){
  For example, if userfilehelp.txt is added, the new file to be saved in the .minigit repository should be named help00.txt, 
  where 00 is the version number.  (The initial file version should be 00.) 
 
-    //Ask about fileversion name and how to change it each time
-    //ask about how to add files to the minigit system
+    //1. Check if the file exists in the current directory
+    //2. Check if file exists in the singly linked list
+    //3. Add a new singly linked list node with a file and fileversion "00" because that is the original
  
     */
     singlyNode* curr = head;
-    while (curr != 0)
+    while (curr != 0) //loop through the linked list
     {
-        if (curr->fileName == filename) //search through the linked list.
+        if (curr->fileName == filename) //search through the linked list to find if there is a matching file name
         {
             cout << "file already exists." << endl;
         }
     }
-    if (fs::exists(".minigit/filename")); // to check if the filename exists inside the .minigit directory *ask about this
+   if (fs::exists(filename))
+   {
+       cout << "file exists in current directory" << endl;
+   }
+   else
     {
-        cout << "File exists in .minigit repository";
-    }
-    else
-    {
-            singlyNode * newfile = new singlyNode; //create a new single node
-            newfile->fileName = filename;
+            singlyNode *newfile = new singlyNode; //create a new singly list node
+            newfile->fileName = filename; //the filename for this new file is the filename added.
             newfile->next = 0; //add a new file
 
-        if (curr == 0) //if there haven't been any files yet
+        if (curr == 0) //if there haven't been any files in the linked list yet
         {
 
-            newfile->next = head; 
-            head = newfile;
-            newfile->fileVersion = fileName; //ask about this
+            newfile->next = head;  //the new file ends up pointing to the head
+            head = newfile; //the head becomes the new file
+            newfile->fileVersion = fileName + "_00"; //stores a version of the file with _00 as the original
 
         }
         else
@@ -59,14 +60,13 @@ void miniGit::addFile(string filename){
           
             while(curr->next != NULL) //add the file node at the end of the linked list
             {
-                curr = curr->next;
+                curr = curr->next; //keep iterating until curr hits NULL
                 curr->next = newfile; //insert at the end of the file
-                newfile->next = NULL;
             }
-           newfile->fileVersion = fileName; //this should be the name of the file in the .minigit version
+           newfile->fileVersion = fileName + "_00"; //this should be the name of the file in the .minigit version
         }
-        
     }
+    
     
 
 
