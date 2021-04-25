@@ -28,10 +28,10 @@ class miniGit{
     public:
     miniGit(); //constructor
     ~miniGit();//destructor
-    void adddFile(string); //add file to repo
-    void removeFile(string); //remove file from repo 
+    void addFile(string filename); //add file to repo
+    void removeFile(string fileName); //remove file from repo 
     void commitChanges(); 
-    void checkout(int); //checkout any of the previous versions of the repo 
+    void checkout(int commitNumber); //checkout any of the previous versions of the repo 
 
 }; 
 
