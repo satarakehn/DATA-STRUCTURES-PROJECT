@@ -47,7 +47,17 @@ int main(int argc, char const *argv[]){
         }
         else if(userinput == "3")
         {
-           
+            int answer;
+           cout << "Would you like to commit changes now?" << endl;
+           cout << "Choose 1 for yes and 2 for no" << endl;
+            
+            if (answer == 1)
+            {
+               commitChanges();
+            }
+            
+            
+            
         }
         else if(userinput == "4")
         {
