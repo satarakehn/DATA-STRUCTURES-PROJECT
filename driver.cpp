@@ -26,14 +26,8 @@ int main(int argc, char const *argv[]){
             string filename;
             cout << "Enter a filename to be added." << endl;
             getline(cin, filename);
-            if (!fs::exists(filename))//check if the file exists
-            {
+           
                 adddFile(filename);
-            }
-            else
-            {
-                cout << "File already exists." << endl;
-            }
             
         }
         else if(userinput == "2")
