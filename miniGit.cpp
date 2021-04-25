@@ -1,17 +1,26 @@
 #include <iostream>
+#include <string>
 #include "miniGit.hpp"
 #include <filesystem>
+
+namespace fs = std::filesystem; 
+using namespace fs; 
 using namespace std; 
+
+int main(){
+    return 0; 
+}
+
 
 miniGit::miniGit(){ //constructor 
 
-};
+}
 
 miniGit::~miniGit(){ //destructor
 
 }
 
-void miniGit::adddFile(string fileName){
+void miniGit::addFile(string fileName){
     //prompt user to enter a file name 
     //check if file name exists if not keep prompting user to enter valid file name 
     //the SLL is checked to see whether file has already been added.

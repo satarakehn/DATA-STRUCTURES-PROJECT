@@ -8,6 +8,8 @@
 #include <filesystem> 
 
 using namespace std; 
+//namespace fs = std::filesystem; 
+
 
 struct singlyNode;
 struct doublyNode{
@@ -18,20 +20,22 @@ struct doublyNode{
 };
 
 struct singlyNode{
-    string fileName; //name of local file
-    string fileVersion; //name of file in .minigit folder 
+    std::string fileName; //name of local file
+    std::string fileVersion; //name of file in .minigit folder 
     singlyNode *next;
 };
 
 class miniGit{
     private:
+
     public:
     miniGit(); //constructor
     ~miniGit();//destructor
-    void adddFile(string); //add file to repo
+    void addFile(string); //add file to repo
     void removeFile(string); //remove file from repo 
     void commitChanges(); 
     void checkout(int); //checkout any of the previous versions of the repo 
+    
 
 }; 
 

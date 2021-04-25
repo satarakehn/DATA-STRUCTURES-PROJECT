@@ -1,8 +1,13 @@
 #include <iostream> 
+#include <string>
 #include "miniGit.hpp"
 #include <filesystem>
-//namespace fs = std::filesystem; 
 using namespace std; 
+
+namespace fs = std::filesystem; 
+using namespace fs;
+
+ 
 
 void displayMenu(){
     cout << "=== Main Menu ===" << endl; 
@@ -15,35 +20,35 @@ void displayMenu(){
 
 int main(int argc, char const *argv[]){
     string userinput;  
-
-   
+    string filename; 
 
     while(true){
         displayMenu();
         getline(cin,userinput);
         if(userinput == "1")
         {
-            string filename;
-            cout << "Enter a filename to be added." << endl;
+            
+            cout << "Enter a filename to be added: " << endl;
             getline(cin, filename);
             if (!fs::exists(filename))//check if the file exists
             {
-                adddFile(filename);
+                //addFile(filename); 
             }
             else
             {
                 cout << "File already exists." << endl;
             }
+
             
         }
         else if(userinput == "2")
         {
-            string filename;
-            cout << "Enter a filename to be deleted." << endl;
+            
+            cout << "Enter a filename to be deleted: " << endl;
             getline(cin, filename);
             if (!fs::exists(filename))
             {
-                removeFile(filename);
+                //removeFile(filename);
             }
             else
             {
