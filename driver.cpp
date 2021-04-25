@@ -23,21 +23,23 @@ int main(int argc, char const *argv[]){
         getline(cin,userinput);
         if(userinput == "1")
         {
+            miniGit s;
             string filename;
             cout << "Enter a filename to be added." << endl;
             getline(cin, filename);
            
-                adddFile(filename);
+                s.addFile(filename);
             
         }
         else if(userinput == "2")
         {
+            miniGit s;
             string filename;
             cout << "Enter a filename to be deleted." << endl;
             getline(cin, filename);
             if (!fs::exists(filename))
             {
-                removeFile(filename);
+                s.removeFile(filename);
             }
             else
             {
@@ -47,13 +49,14 @@ int main(int argc, char const *argv[]){
         }
         else if(userinput == "3")
         {
+            miniGit s;
             int answer;
            cout << "Would you like to commit changes now?" << endl;
            cout << "Choose 1 for yes and 2 for no" << endl;
             
             if (answer == 1)
             {
-               commitChanges();
+               s.commitChanges();
             }
             
             
