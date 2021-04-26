@@ -1,7 +1,7 @@
 #include <iostream> 
 #include "miniGit.hpp"
 #include <filesystem>
-//namespace fs = std::filesystem; 
+namespace fs = std::filesystem; 
 using namespace std; 
 
 void displayMenu(){
