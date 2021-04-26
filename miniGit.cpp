@@ -29,44 +29,7 @@ void miniGit::addFile(string filename){
     //3. Add a new singly linked list node with a file and fileversion "00" because that is the original
  
     */
-    singlyNode* curr = head;
-    while (curr != 0) //loop through the linked list
-    {
-        if (curr->fileName == filename) //search through the linked list to find if there is a matching file name
-        {
-            cout << "file already exists." << endl;
-        }
-    }
-   if (fs::exists(filename))
-   {
-       cout << "file exists in current directory" << endl;
-   }
-   else
-    {
-            singlyNode *newfile = new singlyNode; //create a new singly list node
-            newfile->fileName = filename; //the filename for this new file is the filename added.
-            newfile->next = 0; //add a new file
-
-        if (curr == 0) //if there haven't been any files in the linked list yet
-        {
-
-            newfile->next = head;  //the new file ends up pointing to the head
-            head = newfile; //the head becomes the new file
-            newfile->fileVersion = fileName + "_00"; //stores a version of the file with _00 as the original
-
-        }
-        else
-        {
-          
-            while(curr->next != NULL) //add the file node at the end of the linked list
-            {
-                curr = curr->next; //keep iterating until curr hits NULL
-                curr->next = newfile; //insert at the end of the file
-            }
-           newfile->fileVersion = fileName + "_00"; //this should be the name of the file in the .minigit version
-        }
-    }
-    
+  
     
 
 
