@@ -13,7 +13,7 @@ int main(){
 
 
 miniGit::miniGit(){ //constructor 
-
+    
 }
 
 miniGit::~miniGit(){ //destructor
@@ -38,16 +38,43 @@ void miniGit::addFile(string filename){
     //3. Add a new singly linked list node with a file and fileversion "00" because that is the original
  
     */
-  
+
+
     
 
 
 }
 
+
 void miniGit::removeFile(string fileName){
     //prompt user ot enter a file name 
     //check the SLL for whether the file exists in the current version of the repo
     //if found delete the SLL node 
+    doublyNode *temp =NULL; 
+    singlyNode *curr = temp->head; 
+    
+
+    while(curr != NULL ){ //singlylist is not empty
+        if(curr->fileName == fileName){ //file is same 
+
+            if(temp != NULL){ //if node is not the head 
+                temp->next = curr->next;
+                delete curr; 
+                cout << "File successfully deleted." << endl;
+                return; 
+            }
+            else //if head is being deleted 
+            {
+                temp ->head = curr->next; 
+                delete curr; 
+                cout << "File successfully deleted."<< endl; 
+                return; 
+            }
+        }
+    }
+    curr->next = temp->next; //unlink node from linked list 
+    delete temp; //free memory 
+ 
 } 
 
 void miniGit::commitChanges(){
@@ -63,6 +90,8 @@ void miniGit::commitChanges(){
     //an exat copy of the SLL from prev node should be copied into the new DLL node 
     //the commit number of the new DLL node will be the prev node commit number incremented by one 
 
+    
+
 } 
 
 
@@ -76,4 +105,5 @@ void miniGit::checkout(int commitNumber){
     //you will need to search through the DLL for a node with a matching commit number 
     //you must disallow add/remove/commit operations when the current version is different from the most ->
     // recent commit (aka the last DLL node)
+
 } 
