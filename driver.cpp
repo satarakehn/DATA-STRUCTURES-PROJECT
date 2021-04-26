@@ -27,6 +27,7 @@ int main(int argc, char const *argv[]){
         getline(cin,userinput);
         if(userinput == "1")
         {
+<<<<<<< HEAD
             
             cout << "Enter a filename to be added: " << endl;
             getline(cin, filename);
@@ -39,16 +40,34 @@ int main(int argc, char const *argv[]){
                 cout << "File already exists." << endl;
             }
 
+=======
+            miniGit s;
+            string filename;
+            cout << "Enter a filename to be added." << endl;
+            getline(cin, filename);
+           
+                s.addFile(filename);
+>>>>>>> d65131bee86d2260031bfa71c30bbb8d35a3bfb6
             
         }
         else if(userinput == "2")
         {
+<<<<<<< HEAD
             
             cout << "Enter a filename to be deleted: " << endl;
             getline(cin, filename);
             if (!fs::exists(filename))
             {
                 //removeFile(filename);
+=======
+            miniGit s;
+            string filename;
+            cout << "Enter a filename to be deleted." << endl;
+            getline(cin, filename);
+            if (!fs::exists(filename))
+            {
+                s.removeFile(filename);
+>>>>>>> d65131bee86d2260031bfa71c30bbb8d35a3bfb6
             }
             else
             {
@@ -58,7 +77,18 @@ int main(int argc, char const *argv[]){
         }
         else if(userinput == "3")
         {
-           
+            miniGit s;
+            int answer;
+           cout << "Would you like to commit changes now?" << endl;
+           cout << "Choose 1 for yes and 2 for no" << endl;
+            
+            if (answer == 1)
+            {
+               s.commitChanges();
+            }
+            
+            
+            
         }
         else if(userinput == "4")
         {
