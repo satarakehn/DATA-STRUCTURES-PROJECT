@@ -20,8 +20,9 @@ miniGit::~miniGit(){ //destructor
 
 }
 
-void miniGit::addFile(string filename){
-    //prompt user to enter a file name 
+void miniGit::addFile(string filename)
+{
+       //prompt user to enter a file name 
     //check if file name exists if not keep prompting user to enter valid file name 
     //the SLL is checked to see whether file has already been added.
     //file by same name cannot be added twice 
@@ -38,6 +39,37 @@ void miniGit::addFile(string filename){
     //3. Add a new singly linked list node with a file and fileversion "00" because that is the original
  
     */
+   doublyNode *m;
+   singlyNode *curr;
+   curr = m->head; //get the head of the single node
+
+
+    singlyNode *newfile = new singlyNode; //create a new singly linked list node
+    newfile->fileName = filename; //this points to the filename
+    newfile->next = NULL; //pointing to null
+
+     int pos = filename.length();
+     string fileversionname = filename.substr(0, pos - 4);
+     string newfilename = fileversionname + "_00" + ".txt";
+     newfile->fileVersion = newfilename;
+
+
+
+    if (curr == NULL) 
+    {
+        newfile = curr;
+        newfile->next = curr->next;
+    }
+    else
+    {
+    
+     while (curr != NULL)
+     {
+        curr = curr->next; 
+        newfile = curr;
+     }
+    }
+ 
 
 
     
