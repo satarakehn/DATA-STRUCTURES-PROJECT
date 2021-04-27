@@ -75,9 +75,7 @@ void miniGit::addFile(string filename)
     //3. Add a new singly linked list node with a file and fileversion "00" because that is the original
  
     */
-   doublyNode *m;
-   singlyNode *curr;
-   curr = m->head; //get the head of the single node
+   singlyNode *curr = head;
 
 
     singlyNode *newfile = new singlyNode; //create a new singly linked list node
@@ -146,6 +144,21 @@ void miniGit::removeFile(string filename){
  
 } 
 
+void Copy(string inputName, string outputName){
+    fstream inputFile;
+    ofstream outputFile;
+    string line;
+    inputFile.open(inputName);
+    outputFile.open(outputName , ios_base::app);
+
+    while (!inputFile.eof()){
+        getline(inputFile, line);
+        outputFile << line << endl;
+    }
+    inputFile.close();
+    outputFile.close();
+}
+
 void miniGit::commitChanges(int commitNum){
     //the current sll should be traversed in it entirety for every node 
     //check whether the fileversion exists 
@@ -160,7 +173,27 @@ void miniGit::commitChanges(int commitNum){
     //the commit number of the new DLL node will be the prev node commit number incremented by one 
 
 
+    cout << "Warning: You will lose your local changes if you checkout a different version before making a commit with current local changes." << endl;
+    cout << "Your current version is: " << currVersion->commitNumber << endl;
     
+    doublyNode *tmp = currVersion;
+    while (tmp != NULL && tmp->commitNumber != commitNumber){
+        if (tmp->commitNumber > commitNumber)
+            tmp = tmp->previous;
+        else
+            tmp = tmp->next;
+    }
+    if (tmp == NULL){
+        cout << "Please enter a valid commit number:" << endl;
+    }
+    else{
+        currVersion = tmp;
+        singlyNode *temp = currVersion->head;
+        while (temp!=NULL){
+            Copy(temp->fileVersion, temp->fileName);
+            temp = temp->next;
+        }
+    }
 
 
 
