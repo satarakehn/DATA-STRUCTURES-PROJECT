@@ -36,7 +36,7 @@ class miniGit{
     bool isEmpty(); 
     void addFile(string filename); //add file to repo
     void removeFile(string filename); //remove file from repo 
-    void commitChanges(); 
+    void commitChanges(int); 
     void checkout(int commitNumber); //checkout any of the previous versions of the repo 
     
 }; 
