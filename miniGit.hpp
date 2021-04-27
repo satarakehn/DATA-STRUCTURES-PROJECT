@@ -15,8 +15,8 @@ struct singlyNode;
 struct doublyNode{
     int commitNumber;
     singlyNode *head; 
-    singlyNode *previous; 
-    singlyNode *next;
+    doublyNode *previous; 
+    doublyNode *next;
 };
 
 struct singlyNode{
@@ -28,6 +28,7 @@ struct singlyNode{
 class miniGit{
     private:
     singlyNode* head; 
+    doublyNode* currVersion; //keep track of current version 
 
     public:
     miniGit(); //constructor

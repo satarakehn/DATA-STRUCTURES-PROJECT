@@ -10,11 +10,45 @@ using namespace std;
 
 
 miniGit::miniGit(){ //constructor 
-    head = NULL; 
+    currVersion = new doublyNode; // current version of our repository 
+    head = NULL; //head of current version (SLL) 
+
+    fs::create_directory(".minigit"); //creates our new directory
+}
+
+void destroySLL(singlyNode* head)
+{
+    if(head == NULL)
+    {
+        return; 
+    }
+    else 
+    {
+        destroySLL(head->next);
+        delete head; 
+    }
+
+}
+
+void destroy_DLL(doublyNode* currVersion)
+{
+    if(currVersion == NULL)
+    {
+        return; 
+    }
+    else 
+    {
+        destroy_DLL(currVersion->next);
+        delete currVersion; 
+    }
+
 }
 
 miniGit::~miniGit(){ //destructor
 
+    destroySLL(head);
+    destroy_DLL(currVersion);
+    
 }
 
 bool miniGit::isEmpty()
