@@ -59,6 +59,9 @@ void miniGit::addFile(string filename)
     {
         newfile = curr;
         newfile->next = curr->next;
+    }else if(fileName == filename)
+    {
+
     }
     else
     {
@@ -109,7 +112,7 @@ void miniGit::removeFile(string fileName){
  
 } 
 
-void miniGit::commitChanges(){
+void miniGit::commitChanges(int commitNum){
     //the current sll should be traversed in it entirety for every node 
     //check whether the fileversion exists 
     //if file version does not exist, copy the file from current directory 
@@ -121,6 +124,12 @@ void miniGit::commitChanges(){
     //once all files have been scanned, create a new DLL node of the repo 
     //an exat copy of the SLL from prev node should be copied into the new DLL node 
     //the commit number of the new DLL node will be the prev node commit number incremented by one 
+
+
+    
+
+
+
 
     
 
@@ -137,5 +146,6 @@ void miniGit::checkout(int commitNumber){
     //you will need to search through the DLL for a node with a matching commit number 
     //you must disallow add/remove/commit operations when the current version is different from the most ->
     // recent commit (aka the last DLL node)
+
 
 } 
