@@ -41,9 +41,7 @@ void miniGit::addFile(string filename)
     //3. Add a new singly linked list node with a file and fileversion "00" because that is the original
  
     */
-   doublyNode *m;
-   singlyNode *curr;
-   curr = m->head; //get the head of the single node
+   singlyNode *curr = head;
 
 
     singlyNode *newfile = new singlyNode; //create a new singly linked list node
