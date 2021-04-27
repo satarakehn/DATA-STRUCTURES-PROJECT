@@ -34,11 +34,13 @@ int main(int argc, char const *argv[]){
         {
             case 1: {
                 //miniGit s;
-                string filename;
-                cout << "Enter a filename to be added:" << endl;
+                while (!fs::exists(filename))
+            { //if the file does not exist in the current directory
+                cout << "Enter a filename to be added: " << endl;
                 getline(cin, filename);
-           
-                s.addFile(filename);
+            }
+                s.addFile(filename); 
+            
             
                 break; 
             }

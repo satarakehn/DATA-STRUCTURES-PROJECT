@@ -75,9 +75,7 @@ void miniGit::addFile(string filename)
 
 }
 
-void deleteFile(string fileName){
-    
-}
+
 void miniGit::removeFile(string filename){
     //prompt user ot enter a file name 
     //check the SLL for whether the file exists in the current version of the repo
