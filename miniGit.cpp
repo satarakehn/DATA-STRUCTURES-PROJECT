@@ -61,9 +61,6 @@ void miniGit::addFile(string filename)
     {
         newfile = curr;
         newfile->next = curr->next;
-    }else if(fileName == filename)
-    {
-
     }
     else
     {
@@ -76,41 +73,43 @@ void miniGit::addFile(string filename)
     }
  
 
-
-    
-
-
 }
 
-
-void miniGit::removeFile(string fileName){
+void deleteFile(string fileName){
+    
+}
+void miniGit::removeFile(string filename){
     //prompt user ot enter a file name 
     //check the SLL for whether the file exists in the current version of the repo
     //if found delete the SLL node 
-    doublyNode *temp =NULL; 
-    singlyNode *curr = temp->head; 
-    
 
-    while(curr != NULL ){ //singlylist is not empty
-        if(curr->fileName == fileName){ //file is same 
 
-            if(temp != NULL){ //if node is not the head 
-                temp->next = curr->next;
-                delete curr; 
-                cout << "File successfully deleted." << endl;
+    singlyNode* temp = head; 
+    singlyNode* previous = NULL; 
+
+    if(isEmpty()){ //check if list is empty 
+        cout << "No files exist." << endl; 
+        return; 
+    }
+    if(filename == temp->fileName){ //checking if file name is the head
+        head = temp->next; //assigning head to a new node 
+        delete temp; 
+        return; 
+    }
+    else 
+    {
+        while(temp != NULL)
+        {
+            if(filename == temp->fileName)
+            {//were at the node aka file we reached 
+                previous->next = temp->next; 
+                delete temp; 
                 return; 
             }
-            else //if head is being deleted 
-            {
-                temp ->head = curr->next; 
-                delete curr; 
-                cout << "File successfully deleted."<< endl; 
-                return; 
-            }
+            previous = temp;
+            temp = temp->next; 
         }
-           curr->next = temp->next; //unlink node from linked list 
-        delete temp; //free memory 
- 
+        cout << "No files exists. " << endl; //when we exit while loop 
     }
  
 } 

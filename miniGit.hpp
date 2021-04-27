@@ -27,7 +27,7 @@ struct singlyNode{
 
 class miniGit{
     private:
-    doublyNode* head; 
+    singlyNode* head; 
 
     public:
     miniGit(); //constructor
