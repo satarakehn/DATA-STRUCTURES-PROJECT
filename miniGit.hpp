@@ -34,10 +34,10 @@ class miniGit{
     miniGit(); //constructor
     ~miniGit();//destructor
     bool isEmpty(); 
-    void addFile(string); //add file to repo
-    void removeFile(string); //remove file from repo 
-    void commitChanges(int); 
-    void checkout(int); //checkout any of the previous versions of the repo 
+    void addFile(string filename); //add file to repo
+    void removeFile(string filename); //remove file from repo 
+    void commitChanges(); 
+    void checkout(int commitNumber); //checkout any of the previous versions of the repo 
     
 }; 
 
