@@ -27,11 +27,12 @@ struct singlyNode{
 
 class miniGit{
     private:
-    //doublyNode *head; 
+    doublyNode* head; 
 
     public:
     miniGit(); //constructor
     ~miniGit();//destructor
+    bool isEmpty(); 
     void addFile(string); //add file to repo
     void removeFile(string); //remove file from repo 
     void commitChanges(int); 

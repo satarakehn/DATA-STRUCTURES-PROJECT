@@ -7,17 +7,19 @@ namespace fs = std::filesystem;
 using namespace fs; 
 using namespace std; 
 
-int main(){
-    return 0; 
-}
 
 
 miniGit::miniGit(){ //constructor 
-    
+    head = NULL; 
 }
 
 miniGit::~miniGit(){ //destructor
 
+}
+
+bool miniGit::isEmpty()
+{
+    return (head == NULL);
 }
 
 void miniGit::addFile(string filename)
@@ -106,9 +108,10 @@ void miniGit::removeFile(string fileName){
                 return; 
             }
         }
+           curr->next = temp->next; //unlink node from linked list 
+        delete temp; //free memory 
+ 
     }
-    curr->next = temp->next; //unlink node from linked list 
-    delete temp; //free memory 
  
 } 
 
