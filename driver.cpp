@@ -17,18 +17,23 @@ void displayMenu(){
     cout << "4. Checkout a file " << endl; 
     cout << "5. Quit" << endl; 
 }
-
 int main(int argc, char const *argv[]){
     bool quit = false; 
     miniGit s;
     string userinput; 
-    int input;  
+    int input = 0;  
     string filename; 
 
     while(!quit){
 
         displayMenu();
         getline(cin, userinput);
+
+        bool isDigit = (userinput[0]=='0' || userinput[0]=='1' || userinput[0]=='2' || userinput[0]=='3' || userinput[0]=='4' || userinput[0]=='5');
+        if (isDigit)
+            input = stoi(userinput);
+        else
+            input = -1;
 
         switch(input)
         {
@@ -60,12 +65,13 @@ int main(int argc, char const *argv[]){
                 break; 
             }
             case 3: {
-                int answer;
+                string answer;
                 int commitNumber; 
                 cout << "Would you like to commit changes now?" << endl;
                 cout << "Choose 1 for yes and 2 for no" << endl;
+                getline(cin, answer);
                 
-                if (answer == 1)
+                if (answer[0] == '1')
                 {
                     s.commitChanges(commitNumber); 
                 }
@@ -76,14 +82,24 @@ int main(int argc, char const *argv[]){
                 break; 
             }
             case 4: {
-                int versionNumber; 
+                int versionNumber;
+                string enteredNumber;
                 cout << "Enter a commit number (version number):" << endl; //if user chooses the checkout a version 
-                s.checkout(versionNumber); 
+                getline(cin, enteredNumber);
+                bool isInt = (userinput[0]=='0' || userinput[0]=='1' || userinput[0]=='2' || userinput[0]=='3' || userinput[0]=='4' || userinput[0]=='5' || userinput[0]=='6' || userinput[0]=='7' || userinput[0]=='8' || userinput[0]=='9');
+                if (isInt){
+                    versionNumber = stoi(enteredNumber);
+                    s.checkout(versionNumber);
+                }
+                else
+                    cout << "Please enter a valid commit number:" << endl;
+ 
                 break; 
             }
             case 5: {
                 //quit function 
-                cout << "Goodbye!" << endl; 
+                cout << "Goodbye!" << endl;
+                quit = true; 
                 break; 
             }
 
