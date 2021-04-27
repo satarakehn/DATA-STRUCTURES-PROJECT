@@ -35,7 +35,7 @@ int main(int argc, char const *argv[]){
             case 1: {
                 //miniGit s;
                 string filename;
-                cout << "Enter a filename to be added." << endl;
+                cout << "Enter a filename to be added:" << endl;
                 getline(cin, filename);
            
                 s.addFile(filename);
@@ -45,7 +45,7 @@ int main(int argc, char const *argv[]){
             case 2: {
                 //miniGit s;
                 string filename;
-                cout << "Enter a filename to be deleted." << endl;
+                cout << "Enter a filename to be deleted:" << endl;
                 getline(cin, filename);
                 if (!fs::exists(filename))
                 {
@@ -59,17 +59,24 @@ int main(int argc, char const *argv[]){
             }
             case 3: {
                 int answer;
+                int commitNumber; 
                 cout << "Would you like to commit changes now?" << endl;
                 cout << "Choose 1 for yes and 2 for no" << endl;
                 
                 if (answer == 1)
                 {
-                    s.commitChanges();
+                    s.commitChanges(commitNumber); 
+                }
+                else
+                {
+                    displayMenu(); //returns to menu if user chooses no 
                 }
                 break; 
             }
             case 4: {
-
+                int versionNumber; 
+                cout << "Enter a commit number (version number):" << endl; //if user chooses the checkout a version 
+                s.checkout(versionNumber); 
                 break; 
             }
             case 5: {
@@ -79,7 +86,7 @@ int main(int argc, char const *argv[]){
             }
 
             default: 
-                cout << "Invalid input" << endl; 
+                cout << "Invalid input." << endl;  //if user enters anything other then options 1-5 
                 break; 
         }
     }
