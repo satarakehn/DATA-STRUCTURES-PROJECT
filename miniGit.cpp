@@ -19,7 +19,7 @@ miniGit::miniGit(){ //constructor
     fs::create_directory(".minigit"); //creates our new directory
 }
 
-void destroySLL(singlyNode* head)
+void destroySLL(singlyNode* head) //helper function for destructor and memory allocated with SLL
 {
     if(head == NULL)
     {
@@ -33,7 +33,7 @@ void destroySLL(singlyNode* head)
 
 }
 
-void destroy_DLL(doublyNode* currVersion)
+void destroy_DLL(doublyNode* currVersion)//helper function for destructor and memory allocated with DLL 
 {
     if(currVersion == NULL)
     {
@@ -49,20 +49,20 @@ void destroy_DLL(doublyNode* currVersion)
 
 miniGit::~miniGit(){ //destructor
 
-    destroySLL(head);
+    destroySLL(head); //calling our helper functions 
     destroy_DLL(currVersion);
     
 }
 
 bool miniGit::isEmpty()
 {
-    return (head == NULL);
+    return (head == NULL); //using a premade function 'isEmpty' to check if linked list is empty 
 }
 
 bool miniGit::addFile(string fileName){
 
-    bool file_exists = false; 
-    singlyNode* curr = head;
+    bool file_exists = false; //settings file esists false 
+    singlyNode* curr = head; //assinging curr as the head of linked list 
     singlyNode* previous = head; 
 
     if(fs::exists(fileName)) //this is checking if file already exists 
@@ -220,6 +220,5 @@ void miniGit::checkout(int commitNumber){
             temp = temp->next;
         }
     }
-
 
 } 
