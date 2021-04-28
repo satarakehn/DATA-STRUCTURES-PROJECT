@@ -154,14 +154,14 @@ void miniGit::removeFile(string filename){
  
 } 
 
-void Copy(string inputName, string outputName){
+void Copy(string inputName, string outputName){ // Function that copies an input file over to some output file
     fstream inputFile;
     ofstream outputFile;
     string line;
     inputFile.open(inputName);
     outputFile.open(outputName , ios_base::app);
 
-    while (!inputFile.eof()){
+    while (!inputFile.eof()){ // Loop through the input file and add all the lines to the output file
         getline(inputFile, line);
         outputFile << line << endl;
     }
@@ -169,17 +169,16 @@ void Copy(string inputName, string outputName){
     outputFile.close();
 }
 
-string incrementVersion(string fileVersion){
+string incrementVersion(string fileVersion){ // Function that increments the version number on the file name string
     char ch1, ch2;
     ch1 = fileVersion[fileVersion.length()-6];
-    ch2 = fileVersion[fileVersion.length()-5];
+    ch2 = fileVersion[fileVersion.length()-5]; // Grabs the two digits representing version number
 
-    int totalNum = ch1*10 + ch2 + 1;
+    int totalNum = ch1*10 + ch2 + 1; // increments the number represented by the two digits
     string num = to_string(totalNum);
-    return fileVersion.substr(0, fileVersion.length()-6) + num + ".txt";
+    return fileVersion.substr(0, fileVersion.length()-6) + num + fileVersion.substr(fileVersion.length()-6, fileVersion.length()); // attaches back the version number, along with the file type.
         
 }
-
 void miniGit::commitChanges(int commitNum){
     //the current sll should be traversed in it entirety for every node 
     //check whether the fileversion exists 
@@ -194,14 +193,14 @@ void miniGit::commitChanges(int commitNum){
     //the commit number of the new DLL node will be the prev node commit number incremented by one
 
 
-    singlyNode *tmp = currVersion->head;
+    singlyNode *tmp = currVersion->head; // dummy node used to traverse the single linked list
     while (tmp!=NULL){
 
-        if (!fs::exists(tmp->fileVersion)){
+        if (!fs::exists(tmp->fileVersion)){ // If the file doesn't exist in .minigit, we add it from the main directory
             Copy(tmp->fileName, tmp->fileVersion);
         }
 
-        else{
+        else{ // Checking if all the lines of the files are the same, we stop whenever we reach the end of a file
             fstream file1(tmp->fileName);
             fstream file2(tmp->fileVersion);
             string line1 = "";
@@ -216,7 +215,7 @@ void miniGit::commitChanges(int commitNum){
                 }
             }
 
-            if (!fileSame){
+            if (!fileSame){ // If the files are the same, we increment the version number on the file name, and reassign the node
                 tmp->fileVersion = incrementVersion(tmp->fileVersion);
                 Copy(tmp->fileName, tmp->fileVersion);
             }
@@ -228,7 +227,7 @@ void miniGit::commitChanges(int commitNum){
 
     }
 
-    currVersion->commitNumber++;
+    currVersion->commitNumber++; // iterating through the linked list
     
 
 } 
@@ -248,16 +247,16 @@ void miniGit::checkout(int commitNumber){
     cout << "Your current version is: " << currVersion->commitNumber << endl;
     
     doublyNode *tmp = currVersion;
-    while (tmp != NULL && tmp->commitNumber != commitNumber){
+    while (tmp != NULL && tmp->commitNumber != commitNumber){ // While iterating, we either want to stop where the commit version can be found, or reach the end of the list 
         if (tmp->commitNumber > commitNumber)
             tmp = tmp->previous;
         else
             tmp = tmp->next;
     }
-    if (tmp == NULL){
+    if (tmp == NULL){ // If we reach the end without seeing the commit version, then the commit number was invalid and does not exist
         cout << "Please enter a valid commit number:" << endl;
     }
-    else{
+    else{ // We now traverse through and copy every file from this commit version
         currVersion = tmp;
         singlyNode *temp = currVersion->head;
         while (temp!=NULL){
