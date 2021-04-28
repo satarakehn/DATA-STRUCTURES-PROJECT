@@ -11,18 +11,19 @@ using namespace std;
 //namespace fs = std::filesystem; 
 
 
-struct singlyNode;
-struct doublyNode{
-    int commitNumber;
-    singlyNode *head; 
-    doublyNode *previous; 
-    doublyNode *next;
-};
+
 
 struct singlyNode{
     std::string fileName; //name of local file
     std::string fileVersion; //name of file in .minigit folder 
     singlyNode *next;
+};
+
+struct doublyNode{
+    int commitNumber;
+    singlyNode *head; 
+    doublyNode *previous; 
+    doublyNode *next;
 };
 
 class miniGit{
@@ -34,7 +35,7 @@ class miniGit{
     miniGit(); //constructor
     ~miniGit();//destructor
     bool isEmpty(); 
-    void addFile(string filename); //add file to repo
+    bool addFile(string fileName); //add file to repo
     void removeFile(string filename); //remove file from repo 
     void commitChanges(int); 
     void checkout(int commitNumber); //checkout any of the previous versions of the repo 
