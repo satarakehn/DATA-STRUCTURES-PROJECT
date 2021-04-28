@@ -59,59 +59,39 @@ bool miniGit::isEmpty()
     return (head == NULL); //using a premade function 'isEmpty' to check if linked list is empty 
 }
 
-bool miniGit::addFile(string fileName){
+void miniGit::addFile(string filename)
+{
+    singlyNode *m;
+    m = currVersion->head;
 
-    bool file_exists = false; //settings file esists false 
-    singlyNode* curr = head; //assinging curr as the head of linked list 
-    singlyNode* previous = head; 
+    int pos = filename.length();
+    string fileversionname = filename.substr(0, pos - 4);
+    string newfilename = fileversionname + "_00" + ".txt";
 
-    if(fs::exists(fileName)) //this is checking if file already exists 
-    {
-        if(fs::is_regular_file(fileName))//cplusplus, checks if file status/path is regular file
-        {
-            file_exists = true; 
-        }
-        else 
-        {
-            file_exists = false; 
-        }
-    }
-
-
+    singlyNode *newfile = new singlyNode;
+    newfile->fileName = filename;
+    newfile->fileVersion = newfilename;
     
-    if(!file_exists) //if the file doesnt exist 
+    if (currVersion->head == NULL)
     {
-        if(curr != NULL) //edge case to check if the file already exists
-            {
-                if(curr->fileName == fileName)
-                    {
-                        cout << "File already exists." << endl; 
-                        return false; 
-                    }
-                else
-                    {
-                        previous = curr; 
-                        curr = curr->next; 
-                    }
-            }
-        if(head == NULL)
-            {
-                head = new singlyNode; 
-                head->fileName = fileName; 
-                head->fileVersion = "0";
-                head->next = NULL; 
-                cout <<"File successfully added." << endl;
-                return true; 
-            }
-
-            previous->next = new singlyNode; 
-            previous->next->fileName = fileName; 
-            previous->next->fileVersion = "0"; 
-            cout << "File successfully added." << endl; 
+        newfile->next = head;
+        currVersion->head = newfile; //newfile becomes currVersion's new head
+        
     }
 
-    return false; 
-
+    while (m != NULL) 
+    {
+        if (m->fileName == filename)
+        {
+            cout << "File already exists" << endl;
+        }
+        else
+        {
+        m = m->next; //iterate each time
+        newfile = m;
+        }
+    }
+   
 }
 
 
