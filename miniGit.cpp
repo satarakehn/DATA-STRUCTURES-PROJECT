@@ -169,6 +169,17 @@ void Copy(string inputName, string outputName){
     outputFile.close();
 }
 
+string incrementVersion(string fileVersion){
+    char ch1, ch2;
+    ch1 = fileVersion[fileVersion.length()-6];
+    ch2 = fileVersion[fileVersion.length()-5];
+
+    int totalNum = ch1*10 + ch2 + 1;
+    string num = to_string(totalNum);
+    return fileVersion.substr(0, fileVersion.length()-6) + num + ".txt";
+        
+}
+
 void miniGit::commitChanges(int commitNum){
     //the current sll should be traversed in it entirety for every node 
     //check whether the fileversion exists 
@@ -183,7 +194,41 @@ void miniGit::commitChanges(int commitNum){
     //the commit number of the new DLL node will be the prev node commit number incremented by one
 
 
+    singlyNode *tmp = currVersion->head;
+    while (tmp!=NULL){
 
+        if (!fs::exists(tmp->fileVersion)){
+            Copy(tmp->fileName, tmp->fileVersion);
+        }
+
+        else{
+            fstream file1(tmp->fileName);
+            fstream file2(tmp->fileVersion);
+            string line1 = "";
+            string line2 = "";
+            bool fileSame = true;
+            while (!file1.eof() && !file2.eof()){
+                getline(file1, line1);
+                getline(file2, line2);
+                if (line1 != line2){
+                    fileSame = false;
+                    break;
+                }
+            }
+
+            if (!fileSame){
+                tmp->fileVersion = incrementVersion(tmp->fileVersion);
+                Copy(tmp->fileName, tmp->fileVersion);
+            }
+            file1.close();
+            file2.close();
+        }
+
+        tmp = tmp->next;
+
+    }
+
+    currVersion->commitNumber++;
     
 
 } 

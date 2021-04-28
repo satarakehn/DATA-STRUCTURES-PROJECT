@@ -55,14 +55,11 @@ int main(int argc, char const *argv[]){
                 string filename;
                 cout << "Enter a filename to be deleted:" << endl;
                 getline(cin, filename);
-                if (!fs::exists(filename))
+                if (fs::exists(filename))
                 {
                     s.removeFile(filename);
                 }
-                else
-                {
-                    cout << "File already exists." << endl;
-                }
+            
                 break; 
             }
             case 3: {
