@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <cstdlib>
 #include "miniGit.hpp"
 #include <filesystem>
 
 namespace fs = std::filesystem; 
 using namespace fs; 
 using namespace std; 
+
 
 
 
@@ -56,54 +59,58 @@ bool miniGit::isEmpty()
     return (head == NULL);
 }
 
-void miniGit::addFile(string filename)
-{
-       //prompt user to enter a file name 
-    //check if file name exists if not keep prompting user to enter valid file name 
-    //the SLL is checked to see whether file has already been added.
-    //file by same name cannot be added twice 
-    //a new SLL node gets added containting the name of the input file, repo file, & pointer to next node
-    //new repo file should ombine original file name and version number 
-    /*
- A new SLL node gets added containing the name of the input file, name of the repos-itory file, as well as a pointer to the next node. 
- The repository file name should bethe combination of the original file name and the version number.  
- For example, if userfilehelp.txt is added, the new file to be saved in the .minigit repository should be named help00.txt, 
- where 00 is the version number.  (The initial file version should be 00.) 
+bool miniGit::addFile(string fileName){
 
-    //1. Check if the file exists in the current directory
-    //2. Check if file exists in the singly linked list
-    //3. Add a new singly linked list node with a file and fileversion "00" because that is the original
- 
-    */
-   singlyNode *curr = head;
+    bool file_exists = false; 
+    singlyNode* curr = head;
+    singlyNode* previous = head; 
 
-
-    singlyNode *newfile = new singlyNode; //create a new singly linked list node
-    newfile->fileName = filename; //this points to the filename
-    newfile->next = NULL; //pointing to null
-
-     int pos = filename.length();
-     string fileversionname = filename.substr(0, pos - 4);
-     string newfilename = fileversionname + "_00" + ".txt";
-     newfile->fileVersion = newfilename;
-
-
-
-    if (curr == NULL) 
+    if(fs::exists(fileName)) //this is checking if file already exists 
     {
-        newfile = curr;
-        newfile->next = curr->next;
+        if(fs::is_regular_file(fileName))//cplusplus, checks if file status/path is regular file
+        {
+            file_exists = true; 
+        }
+        else 
+        {
+            file_exists = false; 
+        }
     }
-    else
-    {
+
+
     
-     while (curr != NULL)
-     {
-        curr = curr->next; 
-        newfile = curr;
-     }
+    if(!file_exists) //if the file doesnt exist 
+    {
+        if(curr != NULL) //edge case to check if the file already exists
+            {
+                if(curr->fileName == fileName)
+                    {
+                        cout << "File already exists." << endl; 
+                        return false; 
+                    }
+                else
+                    {
+                        previous = curr; 
+                        curr = curr->next; 
+                    }
+            }
+        if(head == NULL)
+            {
+                head = new singlyNode; 
+                head->fileName = fileName; 
+                head->fileVersion = "0";
+                head->next = NULL; 
+                cout <<"File successfully added." << endl;
+                return true; 
+            }
+
+            previous->next = new singlyNode; 
+            previous->next->fileName = fileName; 
+            previous->next->fileVersion = "0"; 
+            cout << "File successfully added." << endl; 
     }
- 
+
+    return false; 
 
 }
 
@@ -117,10 +124,12 @@ void miniGit::removeFile(string filename){
     singlyNode* temp = head; 
     singlyNode* previous = NULL; 
 
-    if(isEmpty()){ //check if list is empty 
+    if(isEmpty())
+    { //check if list is empty 
         cout << "No files exist." << endl; 
         return; 
     }
+
     if(filename == temp->fileName){ //checking if file name is the head
         head = temp->next; //assigning head to a new node 
         delete temp; 
@@ -138,6 +147,7 @@ void miniGit::removeFile(string filename){
             }
             previous = temp;
             temp = temp->next; 
+            cout << "File successfully deleted." << endl;
         }
         cout << "No files exists. " << endl; //when we exit while loop 
     }
